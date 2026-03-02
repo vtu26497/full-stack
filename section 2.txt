@@ -1,0 +1,50 @@
+-- Drop tables if already exist (avoids error if you run again)
+DROP TABLE IF EXISTS orders;
+DROP TABLE IF EXISTS customers;
+
+-- Create Customers Table (4 attributes)
+CREATE TABLE customers (
+    customer_id INTEGER PRIMARY KEY,
+    customer_name TEXT,
+    city TEXT,
+    phone TEXT
+);
+
+-- Create Orders Table (4 attributes)
+CREATE TABLE orders (
+    order_id INTEGER PRIMARY KEY,
+    product_name TEXT,
+    order_date TEXT,
+    customer_id INTEGER,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+-- Insert data into Customers
+INSERT INTO customers VALUES
+(1, 'John', 'New York', '1234567890'),
+(2, 'Alice', 'Chicago', '9876543210'),
+(3, 'Bob', 'Los Angeles', '5556667777');
+
+-- Insert data into Orders
+INSERT INTO orders VALUES
+(101, 'Laptop', '2024-08-01', 1),
+(102, 'Mobile', '2024-08-05', 2),
+(103, 'Tablet', '2024-08-10', 3),
+(104, 'Camera', '2024-08-15', 1);
+
+-- View Customers table
+SELECT * FROM customers;
+
+-- View Orders table
+SELECT * FROM orders;
+
+-- Join both tables
+SELECT 
+    o.order_id,
+    o.product_name,
+    o.order_date,
+    c.customer_name,
+    c.city
+FROM orders o
+JOIN customers c
+ON o.customer_id = c.customer_id;

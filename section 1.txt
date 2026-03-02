@@ -1,0 +1,49 @@
+-- Create Table
+CREATE TABLE sales (
+    sale_id INT PRIMARY KEY,
+    product_name VARCHAR(50),
+    sale_date DATE,
+    sale_amount INT
+);
+
+-- Insert Data
+INSERT INTO sales (sale_id, product_name, sale_date, sale_amount) VALUES
+(1, 'Widget A', '2024-08-01', 100),
+(2, 'Widget B', '2024-08-05', 150),
+(3, 'Widget C', '2024-08-07', 200),
+(4, 'Widget A', '2024-08-10', 120),
+(5, 'Widget B', '2024-08-15', 180),
+(6, 'Widget C', '2024-08-20', 250);
+
+-- View Data
+SELECT * FROM sales;
+
+-- Extract Date Only
+SELECT sale_id, product_name,
+DATE(sale_date) AS sale_date_only
+FROM sales;
+
+-- Extract Year
+SELECT sale_id, product_name,
+strftime('%Y', sale_date) AS sale_year
+FROM sales;
+
+-- Add 7 Days
+SELECT sale_id, product_name,
+date(sale_date, '+7 days') AS sale_date_plus_7_days
+FROM sales;
+
+-- Math Functions
+SELECT
+ABS(-25) AS abs_value,
+ROUND(12.678, 2) AS rounded_value,
+POWER(2, 5) AS power_value,
+17 % 5 AS modulus_value;
+
+-- String Functions
+SELECT
+UPPER('database') AS upper_text,
+LOWER('SQL') AS lower_text,
+LENGTH('computer') AS text_length,
+SUBSTR('FullStack', 1, 4) AS sub_text,
+'My' || 'SQL' AS combined_text;
